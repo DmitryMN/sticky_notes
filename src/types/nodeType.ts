@@ -1,9 +1,8 @@
 
 
 export type NodeType = {
-    id: number
+    id: string
     text: string
-    date: Date
 }
 
 export type NodeState = {
