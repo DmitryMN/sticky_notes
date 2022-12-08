@@ -2,9 +2,11 @@ import React, { useState, ChangeEvent} from 'react';
 
 type InputPropsType = {
     placeHolderValue: string
+    className?: string
+    callbackBlur?: () => void
 }
 
-export const Input: React.FC<InputPropsType> = ({placeHolderValue}) => {
+export const Input: React.FC<InputPropsType> = ({placeHolderValue, className='', callbackBlur}) => {
 
     const [value, setValue] = useState('');
 
@@ -13,6 +15,6 @@ export const Input: React.FC<InputPropsType> = ({placeHolderValue}) => {
     }
 
     return (
-        <input className='input' value={value} onChange={changeValue} placeholder={placeHolderValue} />
+        <input className={className} value={value} onChange={changeValue} placeholder={placeHolderValue} autoFocus={true} onBlur={callbackBlur}/>
     )
 }

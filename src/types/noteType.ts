@@ -1,12 +1,12 @@
 
 
-export type NodeType = {
+export type NoteType = {
     id: string
     text: string
 }
 
-export type NodeState = {
-    nodes: Array<NodeType>
+export type NoteState = {
+    notes: Array<NoteType>
     error: string
     loading: boolean
 }

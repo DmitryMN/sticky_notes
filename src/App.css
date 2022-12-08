@@ -2,3 +2,15 @@
   border: 1px solid #DA70D6;
   padding: 5px;
 }
+.note {
+  display: flex;
+  margin: 10px;
+  border: 1px solid #8A2BE2;
+}
+.note__text {
+  font-size: 20px;
+  padding: 5px;
+}
+.note__input {
+  width: 100%
+}
