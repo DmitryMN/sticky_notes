@@ -1,16 +1,40 @@
-.input {
-  border: 1px solid #DA70D6;
-  padding: 5px;
-}
 .note {
   display: flex;
   margin: 10px;
   border: 1px solid #8A2BE2;
 }
-.note__text {
-  font-size: 20px;
-  padding: 5px;
+
+.note__inputfield {
+  width: 100%;
+  font-size: 18px;
+}
+.note__span {
+  font-size: inherit;
 }
 .note__input {
-  width: 100%
+  font-size: inherit;
+  width: 100%;
+  padding: 0 10px;
+}
+.formNote {
+  display: flex;
+  margin: 20px 0 10px 10px;
+  
+}
+.form-input {
+  border: 1px solid #8A2BE2;
+  font-size: 18px;
+}
+.btn-form {
+  width: 24px;
+  height: 24px;
+  background-color: #8A2BE2;
+  border-radius: 5px;
+  margin-left: 10px;
+  color: azure;
+  cursor: pointer;
+}
+.search-input {
+  display: inline-block;
+  margin-left: 10px;
 }

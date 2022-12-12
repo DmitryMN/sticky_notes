@@ -9,5 +9,12 @@ const instance = axios.create({
 export const noteApi = {
     getNodes: async () => {
         return instance.get<Array<NoteType>>("nodes.json");
-    }
+    },
+    addNewNote: async (data: Array<NoteType>) => {
+        return instance.post(JSON.stringify(data) ,{
+            headers: {
+                'Content-Type': 'text/json'
+              }
+        });
+    },
 }

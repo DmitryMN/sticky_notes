@@ -1,7 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-export const Button: React.FC = () => {
+type ButtonPropsType = {
+  classN?: string
+  text?: string
+  callback?: () => void
+}
+
+export const Button: React.FC<ButtonPropsType> = ({text, classN, callback}) => {
   return (
-    <div>Button: React.FC</div>
+    <button className={classN} onClick={callback}>{text}</button>
   )
 }
