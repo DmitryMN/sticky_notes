@@ -3,17 +3,17 @@ import { NoteType } from "../types/noteType";
 
 
 const instance = axios.create({
-    baseURL: "./",
+    baseURL: "http://localhost:3001",
 });
 
 export const noteApi = {
     getNodes: async () => {
-        return instance.get<Array<NoteType>>("nodes.json");
+        return instance.get<Array<NoteType>>("/notes");
     },
-    addNewNote: async (data: Array<NoteType>) => {
-        return instance.post(JSON.stringify(data) ,{
+    addNewNote: async (data: NoteType) => {
+        return instance.post("/notes", JSON.stringify(data) ,{
             headers: {
-                'Content-Type': 'text/json'
+                'Content-Type': 'application/json' 
               }
         });
     },

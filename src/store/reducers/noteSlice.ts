@@ -1,6 +1,6 @@
 import { NoteState } from '../../types/noteType';
 import {createSlice } from '@reduxjs/toolkit';
-import { fetchNotes } from './ActionCreators'
+import { fetchNotes, setNote } from './ActionCreators'
 
 
 let initialState: NoteState = {
@@ -40,7 +40,9 @@ export const noteSlice = createSlice({
                 if(action.payload) {
                     state.error = action.payload;
                 }
-            });
+            }).addCase(setNote.fulfilled, (state, action) => {
+                state.notes.push(action.payload);
+            })
     }
 });
 

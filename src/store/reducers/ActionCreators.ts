@@ -14,10 +14,24 @@ import { NoteType } from '../../types/noteType';
 // }
 
 export const fetchNotes = createAsyncThunk<NoteType[] | undefined, void, { rejectValue: string }>(
-    "node/fetchNodes",
+    "note/fetchNotes",
     async (_, { rejectWithValue }) => {
         try {
             const response = await noteApi.getNodes();
+            return response.data;
+        } catch (e) {
+            if (e instanceof Error) {
+                rejectWithValue(e.message);
+            }
+        }
+    },
+);
+
+export const setNote = createAsyncThunk(
+    "note/setNote",
+    async (data: NoteType, { rejectWithValue }) => {
+        try {
+            const response = await noteApi.addNewNote(data);
             return response.data;
         } catch (e) {
             if (e instanceof Error) {

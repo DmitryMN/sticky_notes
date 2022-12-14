@@ -7,13 +7,14 @@ import Note from './components/Note';
 import NoteForm from './components/NoteForm';
 
 export const App = () => {
-  const {notes} = useAppSelector(state => state.notes);
+  const {notes, loading} = useAppSelector(state => state.notes);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchNotes());
   }, []);
 
+  if(loading) return <div>Идет загрузка...</div>
 
   return (
     <div className="App">
@@ -21,7 +22,7 @@ export const App = () => {
       <h1>Sticky Notes</h1>
       <NoteForm />
       <Input classN='search-input' placeHolderValue='Search...' />
-      {
+      { 
         notes.map(note => <Note key={note.id} text={note.text}/>)
       }
     </div>
