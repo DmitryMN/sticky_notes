@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Input } from '../components/UI/Input'
+import { Input } from '../components/UI/Input';
+import {Button} from '../components/UI/Button';
+import { NoteType } from '../types/noteType';
 
 type NotePropsTYpe = {
-  text: string
+  note: NoteType
+  callBack: (id: string) => void
 }
 
-const Note: React.FC<NotePropsTYpe> = ({ text }) => {
+const Note: React.FC<NotePropsTYpe> = ({ note, callBack }) => {
   let [editMode, setEditMode] = useState<boolean>(false);
 
   const activateEditMode = () => {
@@ -14,16 +17,16 @@ const Note: React.FC<NotePropsTYpe> = ({ text }) => {
 
   const activateViewMode = () => {
     setEditMode(false);
-    console.log("bluur");
   }
 
   return (
     <div className='note'>
       <div className='note__inputfield' onDoubleClick={activateEditMode}>
         {
-          editMode ? <Input placeHolderValue='введите текст' classN='note__input' callbackBlur={activateViewMode} /> : <span className='note__span'>{text}</span>
+          editMode ? <Input placeHolderValue='введите текст' classN='note__input' callbackBlur={activateViewMode} /> : <span className='note__span'>{note.text}</span>
         }
       </div>
+      <Button classN='note__btn' text='remove' callback={() => {callBack(note.id)}}/>
     </div>
   )
 }

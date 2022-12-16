@@ -1,12 +1,12 @@
 .note {
   display: flex;
   margin: 10px;
-  border: 1px solid #8A2BE2;
 }
 
 .note__inputfield {
   width: 100%;
   font-size: 18px;
+  border: 1px solid #8A2BE2;
 }
 .note__span {
   font-size: inherit;
@@ -16,10 +16,16 @@
   width: 100%;
   padding: 0 10px;
 }
+.note__btn {
+  background-color: #8A2BE2;
+  border-radius: 5px;
+  padding: 2px;
+  color: azure;
+  margin-left: 10px;
+}
 .formNote {
   display: flex;
   margin: 20px 0 10px 10px;
-  
 }
 .form-input {
   border: 1px solid #8A2BE2;

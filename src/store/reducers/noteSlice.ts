@@ -1,6 +1,6 @@
-import { NoteState, NoteType } from '../../types/noteType';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchNotes, setNote } from './ActionCreators'
+import { NoteState } from '../../types/noteType';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchNotes, setNote, removeNote } from './ActionCreators'
 
 
 let initialState: NoteState = {
@@ -26,6 +26,7 @@ export const noteSlice = createSlice({
             }
         }).addCase(fetchNotes.rejected, (state, action) => {
             if (action.payload) {
+                state.loading = false;
                 state.error = action.payload;
             }
         }).addCase(setNote.pending, (state) => {
@@ -36,6 +37,20 @@ export const noteSlice = createSlice({
             if(action.payload !== undefined) state.notes.push(action.payload);
         }).addCase(setNote.rejected, (state, action) => {
             if (action.payload) {
+                state.loading = false;
+                state.error = action.payload;
+            }
+        }).addCase(removeNote.pending, (state) => {
+            state.loading = true
+            state.error = '';
+        }).addCase(removeNote.fulfilled, (state, action) => {
+            state.loading = false;
+            if(action.payload) {
+                state.notes = state.notes.filter(note => note.id !== action.payload)
+            }
+        }).addCase(removeNote.rejected, (state, action) => {
+            if (action.payload) {
+                state.loading = false;
                 state.error = action.payload;
             }
         })

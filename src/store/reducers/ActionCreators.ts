@@ -24,20 +24,34 @@ export const fetchNotes = createAsyncThunk<Array<NoteType> | undefined, void, {r
             throw new Error('Нет данных');
         }
     } catch(e) {
-        rejectWithValue('server Error')
+        return rejectWithValue('server Error')
     }
 })
 
-export const setNote = createAsyncThunk<NoteType, NoteType, { rejectValue: string }>(
+export const setNote = createAsyncThunk<NoteType | undefined, NoteType, { rejectValue: string }>(
     "note/setNote",
-    async (newNote, thunkApi) => {
+    async (newNote, {rejectWithValue}) => {
         try {
             const response = await noteApi.addNewNote(newNote);
-            if (response.status === 201) {
+            if (response.status === 201 && response.data) {
                 return response.data;
             }
         } catch (e) {
-            return thunkApi.rejectWithValue("Error add new Note");
+            return rejectWithValue("Error add new Note");
+        }
+    },
+);
+
+export const removeNote = createAsyncThunk<string | undefined, string, { rejectValue: string }>(
+    "note/removeNote",
+    async (id, {rejectWithValue}) => {
+        try {
+            const response = await noteApi.removeNote(id);
+            if(response.status === 200) {
+                return id;
+            }            
+        } catch (e) {
+            return rejectWithValue("Error add new Note");
         }
     },
 );
