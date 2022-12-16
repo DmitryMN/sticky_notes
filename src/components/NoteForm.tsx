@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { Button } from './UI/Button'
 import { useAppDispatch } from '../hooks/redux';
 import { setNote } from '../store/reducers/ActionCreators';
+import { NoteType } from '../types/noteType';
 
 const NoteForm: React.FC = () => {
 
@@ -14,7 +15,7 @@ const NoteForm: React.FC = () => {
 
   const addNewPost = (text: string) => {
     const date = Date.now().toString();
-    const newNote = {
+    const newNote: NoteType = {
       id: date,
       text
     }

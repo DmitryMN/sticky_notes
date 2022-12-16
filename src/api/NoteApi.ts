@@ -1,6 +1,5 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import { NoteType } from "../types/noteType";
-
 
 const instance = axios.create({
     baseURL: "http://localhost:3001",
@@ -8,12 +7,12 @@ const instance = axios.create({
 
 export const noteApi = {
     getNodes: async () => {
-        return instance.get<Array<NoteType>>("/notes");
+        return instance.get("/notes");
     },
-    addNewNote: async (data: NoteType) => {
-        return instance.post("/notes", JSON.stringify(data) ,{
+    addNewNote: async (newNote: NoteType) => {
+        return instance.post("/notes", JSON.stringify(newNote),  {
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
               }
         });
     },
