@@ -16,6 +16,13 @@ export const noteApi = {
               }
         });
     },
+    updateNotetext: async (id: string, text: string) => {
+        return instance.put<NoteType>(`/notes/${id}`, {text}, {
+            headers: {
+                'Content-Type': 'application/json'
+              }
+        });
+    },
     removeNote: async (id: string) => {
         return instance.delete(`/notes/${id}`)
     },

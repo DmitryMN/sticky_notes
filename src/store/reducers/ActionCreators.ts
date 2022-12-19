@@ -13,24 +13,24 @@ import { NoteType } from '../../types/noteType';
 //     }
 // }
 
-export const fetchNotes = createAsyncThunk<Array<NoteType> | undefined, void, {rejectValue: string}>(
-    'note/fetchNote', 
-    async (_ ,{rejectWithValue}) => {
-    try {
-        const response =  await noteApi.getNodes();
-        if(response.status === 200) {
-            return response.data
-        } else {
-            throw new Error('Нет данных');
+export const fetchNotes = createAsyncThunk<Array<NoteType> | undefined, void, { rejectValue: string }>(
+    'note/fetchNote',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await noteApi.getNodes();
+            if (response.status === 200) {
+                return response.data
+            } else {
+                throw new Error('Нет данных');
+            }
+        } catch (e) {
+            return rejectWithValue('server Error')
         }
-    } catch(e) {
-        return rejectWithValue('server Error')
-    }
-})
+    })
 
 export const setNote = createAsyncThunk<NoteType | undefined, NoteType, { rejectValue: string }>(
     "note/setNote",
-    async (newNote, {rejectWithValue}) => {
+    async (newNote, { rejectWithValue }) => {
         try {
             const response = await noteApi.addNewNote(newNote);
             if (response.status === 201 && response.data) {
@@ -42,14 +42,30 @@ export const setNote = createAsyncThunk<NoteType | undefined, NoteType, { reject
     },
 );
 
+export const updateTextNote = createAsyncThunk<NoteType | undefined, NoteType, { rejectValue: string }>(
+    'note/updateText',
+    async (note, {rejectWithValue}) => {
+        try {
+            const response = await noteApi.updateNotetext(note.id, note.text);
+            if(response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Ошибка обновления');
+            }
+        } catch(e) {
+            return rejectWithValue("Error add new Note");
+        }
+    }
+);
+
 export const removeNote = createAsyncThunk<string | undefined, string, { rejectValue: string }>(
     "note/removeNote",
-    async (id, {rejectWithValue}) => {
+    async (id, { rejectWithValue }) => {
         try {
             const response = await noteApi.removeNote(id);
-            if(response.status === 200) {
+            if (response.status === 200) {
                 return id;
-            }            
+            }
         } catch (e) {
             return rejectWithValue("Error add new Note");
         }

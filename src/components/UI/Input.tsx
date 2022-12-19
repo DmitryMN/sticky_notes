@@ -3,7 +3,7 @@ import React, { useState, ChangeEvent} from 'react';
 type InputPropsType = {
     placeHolderValue: string
     classN?: string
-    callbackBlur?: () => void
+    callbackBlur?: (text: string) => void
 }
 
 export const Input: React.FC<InputPropsType> = ({placeHolderValue, classN , callbackBlur}) => {
@@ -12,10 +12,13 @@ export const Input: React.FC<InputPropsType> = ({placeHolderValue, classN , call
 
     const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.currentTarget.value);
-        console.log("view");
+    }
+
+    const onBlurCall = () => {
+        callbackBlur && callbackBlur(value);
     }
 
     return (
-        <input className={classN} value={value} onChange={changeValue} placeholder={placeHolderValue} autoFocus onBlur={callbackBlur}/>
+        <input className={classN} value={value} onChange={changeValue} placeholder={placeHolderValue} autoFocus onBlur={onBlurCall}/>
     )
 }

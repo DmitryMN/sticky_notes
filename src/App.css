@@ -22,6 +22,7 @@
   padding: 2px;
   color: azure;
   margin-left: 10px;
+  cursor: pointer;
 }
 .formNote {
   display: flex;

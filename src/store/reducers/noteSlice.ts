@@ -1,6 +1,6 @@
 import { NoteState } from '../../types/noteType';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchNotes, setNote, removeNote } from './ActionCreators'
+import { fetchNotes, setNote, removeNote, updateTextNote } from './ActionCreators'
 
 
 let initialState: NoteState = {
@@ -49,6 +49,24 @@ export const noteSlice = createSlice({
                 state.notes = state.notes.filter(note => note.id !== action.payload)
             }
         }).addCase(removeNote.rejected, (state, action) => {
+            if (action.payload) {
+                state.loading = false;
+                state.error = action.payload;
+            }
+        }).addCase(updateTextNote.pending, (state) => {
+            state.loading = true;
+            state.error = '';
+        }).addCase(updateTextNote.fulfilled, (state, action) => {
+            if(action.payload) {
+                state.loading = false;
+                let data = action.payload
+                state.notes.forEach((note) => {
+                    if(note.id === data.id) {
+                        note.text = data.text
+                    }
+                });
+            }
+        }).addCase(updateTextNote.rejected, (state, action) => {
             if (action.payload) {
                 state.loading = false;
                 state.error = action.payload;
