@@ -16,10 +16,10 @@ export const noteApi = {
               }
         });
     },
-    updateNotetext: async (id: string, text: string) => {
-        return instance.put<NoteType>(`/notes/${id}`, {text}, {
+    updateNotetext: async (id: string, text: string, tag: string) => {
+        return instance.put<NoteType>(`/notes/${id}`, {text, tag}, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               }
         });
     },

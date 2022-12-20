@@ -3,6 +3,7 @@
 export type NoteType = {
     id: string
     text: string
+    tag: string
 }
 
 export type NoteState = {

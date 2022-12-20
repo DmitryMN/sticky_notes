@@ -63,6 +63,7 @@ export const noteSlice = createSlice({
                 state.notes.forEach((note) => {
                     if(note.id === data.id) {
                         note.text = data.text
+                        note.tag = data.tag
                     }
                 });
             }

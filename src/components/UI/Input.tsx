@@ -1,9 +1,12 @@
 import React, { useState, ChangeEvent} from 'react';
+import {CallBackBlurType} from '../Note'
+
+
 
 type InputPropsType = {
     placeHolderValue: string
     classN?: string
-    callbackBlur?: (text: string) => void
+    callbackBlur?: (paramInp: CallBackBlurType) => void
 }
 
 export const Input: React.FC<InputPropsType> = ({placeHolderValue, classN , callbackBlur}) => {
@@ -11,11 +14,17 @@ export const Input: React.FC<InputPropsType> = ({placeHolderValue, classN , call
     const [value, setValue] = useState('');
 
     const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
+        event.stopPropagation();
         setValue(event.currentTarget.value);
     }
 
     const onBlurCall = () => {
-        callbackBlur && callbackBlur(value);
+        let tag = "";
+        const regEx = value.match(/(#\w+)/gi);
+        if(regEx !== null) {
+            tag = regEx[0] || "";
+        }
+        callbackBlur && callbackBlur({text: value, tag});
     }
 
     return (

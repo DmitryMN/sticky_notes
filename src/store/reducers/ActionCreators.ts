@@ -46,7 +46,7 @@ export const updateTextNote = createAsyncThunk<NoteType | undefined, NoteType, {
     'note/updateText',
     async (note, {rejectWithValue}) => {
         try {
-            const response = await noteApi.updateNotetext(note.id, note.text);
+            const response = await noteApi.updateNotetext(note.id, note.text, note.tag);
             if(response.status === 200) {
                 return response.data;
             } else {

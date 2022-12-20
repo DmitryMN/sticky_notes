@@ -14,10 +14,16 @@ const NoteForm: React.FC = () => {
   }
 
   const addNewPost = (text: string) => {
+    let tag = "";
+    const regEx = val.match(/(#\w+)/gi);
+    if(regEx !== null) {
+        tag = regEx[0];
+    }
     const date = Date.now().toString();
     const newNote: NoteType = {
       id: date,
-      text
+      text,
+      tag
     }
     dispatch(setNote(newNote));
   }
